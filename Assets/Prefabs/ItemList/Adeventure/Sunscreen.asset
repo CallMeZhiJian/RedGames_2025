@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e96d338d02886fb448ff0d687dd2d49b, type: 3}
   m_Name: Sunscreen
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 445a3517ed3ba1548b95b89442ba4553, type: 3}
-  category: 1
+  sprite: {fileID: 21300000, guid: 8769ce535cd12624bac58783c313dccd, type: 3}
+  category: 3
   points: 100

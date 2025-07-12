@@ -29,6 +29,37 @@ public class Box : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision != null)
+        {
+            Item item = collision.gameObject.GetComponent<Item>();
 
+            if (item != null)
+            {
+                if (category != Category.Biggie)
+                {
+                    if (item.category == category)
+                    {
+                        ScoreManager.Instance.OnCorrectSort();
+                    }
+                    else
+                    {
+                        ScoreManager.Instance.OnWrongSort();
+                    }
+                }
+                else
+                {
+                    if (item.category == category)
+                    {
+                        ScoreManager.Instance.OnBiggieCorrectSort();
+                    }
+                    else
+                    {
+                        ScoreManager.Instance.OnBiggieWrongSort();
+                    }
+                }
+
+                Destroy(collision.gameObject);
+            }
+        }
     }
 }

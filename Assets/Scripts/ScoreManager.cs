@@ -2,13 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
+    public static ScoreManager Instance;
+
     public int score = 0;
-    public int scorePerCorrect = 10;
-    public int penaltyPerWrong = 5;
-    public Text scoreText;
+    public int scorePerCorrect = 5;
+    public int penaltyPerWrong = 3;
+    public int scorePerBiggieCorrect = 10;
+    public TextMeshProUGUI scoreText;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -28,10 +37,21 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreText();
     }
 
+    public void OnBiggieCorrectSort()
+    {
+        score += scorePerBiggieCorrect;
+        UpdateScoreText();
+    }
+
+    public void OnBiggieWrongSort()
+    {
+
+    }
+
     void UpdateScoreText()
     {
         if (scoreText != null)
-            scoreText.text = "Score: " + score.ToString();
+            scoreText.SetText("Score: " + score.ToString());
     }
 }
 
