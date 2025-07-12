@@ -18,6 +18,11 @@ public class TransformHolder : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        boxGrandParent = FindObjectOfType<SwipeController>().transform;
+    }
+
     public Vector3 GetRightStartPos() 
     { 
         if(rightGroupStartPoint) 
