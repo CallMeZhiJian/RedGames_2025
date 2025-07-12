@@ -5,6 +5,7 @@ using UnityEngine;
 public class Box : MonoBehaviour
 {
     [SerializeField] private Category category;
+    [SerializeField] private ParticleSystem scoreVFX;
 
     public Category GetCategory() { return category; }
 
@@ -40,6 +41,7 @@ public class Box : MonoBehaviour
                     if (item.category == category)
                     {
                         ScoreManager.Instance.OnCorrectSort(5);
+                        scoreVFX.Play();
                     }
                     else
                     {
@@ -60,6 +62,7 @@ public class Box : MonoBehaviour
                     if (item.category == category)
                     {
                         ScoreManager.Instance.OnCorrectSort(10);
+                        scoreVFX.Play();
                     }
                 }
 
