@@ -12,7 +12,7 @@ public class SwipeController : MonoBehaviour
 
     void Update()
     {
-#if !PLATFORM_ANDROID
+#if PLATFORM_WEBGL
         if (Input.anyKey)
         {
             var pos = transform.position;
