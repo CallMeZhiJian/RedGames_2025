@@ -38,13 +38,13 @@ public class Item : MonoBehaviour
                 tag = "Sport";
                 break;
             case Category.Food:
-                tag = "Sport";
+                tag = "Food";
                 break;
             case Category.Adventure:
-                tag = "Sport";
+                tag = "Adventure";
                 break;
             case Category.Biggie:
-                tag = "Sport";
+                tag = "Biggie";
                 break;
         }
         gameObject.tag = tag;

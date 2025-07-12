@@ -46,17 +46,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDirection: 0
   spawnRate: 0.6
+  itemPrefab: {fileID: 0}
   spawnObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: a28f5fec0af78524a948a6fe6a126c49, type: 2}
+  - {fileID: 11400000, guid: 9350bc6465212f944a8ec277c354bca2, type: 2}
+  - {fileID: 11400000, guid: c3c6ac06f5b5b404d8d4b917074003c7, type: 2}
+  - {fileID: 11400000, guid: 105b63698a8ac1746a1b29d2ee5dcad1, type: 2}
+  - {fileID: 11400000, guid: eb9dd73238e2f8240a213fb3f7adf3e3, type: 2}
+  - {fileID: 11400000, guid: 1dfbfdbf5eebf3747b8ed7547ab2266c, type: 2}
+  - {fileID: 11400000, guid: 9a51d98bbdbacfb4099192fe3002bb3b, type: 2}
+  - {fileID: 11400000, guid: c51d327c47aeb4f40b151dcfa1d499d7, type: 2}
+  - {fileID: 11400000, guid: 460248f0cb598eb41a15e517b5fd2ea4, type: 2}
+  - {fileID: 11400000, guid: f014536515307024d9af2bdbfa2e1431, type: 2}
   cachedRate: 5
   transforms:
   - Parent: {fileID: 0}

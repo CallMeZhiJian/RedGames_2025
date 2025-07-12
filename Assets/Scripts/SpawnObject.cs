@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class SpawnObject : MonoBehaviour
 {
@@ -26,7 +25,8 @@ public class SpawnObject : MonoBehaviour
 
     public Direction spawnDirection;
     public float spawnRate = 1f;
-    public List<GameObject> spawnObjects;
+    public GameObject itemPrefab;
+    public List<ItemScriptableObject> spawnObjects;
     public int cachedRate = 5;
     public List<SpawnerTransform> transforms;
     public float initialDelay = 3f;
@@ -36,7 +36,7 @@ public class SpawnObject : MonoBehaviour
     private bool delayFinished = false;
     private int transformIndex = 0;
 
-    private Dictionary<GameObject, int> cachedObjectList = new Dictionary<GameObject, int>();
+    private Dictionary<ItemScriptableObject, int> cachedObjectList = new Dictionary<ItemScriptableObject, int>();
 
     void Update()
     {
@@ -54,12 +54,12 @@ public class SpawnObject : MonoBehaviour
 
         if (timer >= spawnRate)
         {
-            List<GameObject> availableObjects = spawnObjects.Where(obj => !cachedObjectList.ContainsKey(obj)).ToList();
+            List<ItemScriptableObject> availableObjects = spawnObjects.Where(obj => !cachedObjectList.ContainsKey(obj)).ToList();
 
             if (availableObjects.Count > 0)
             {
                 int randNum = UnityEngine.Random.Range(0, availableObjects.Count);
-                GameObject objectToSpawn = availableObjects[randNum];
+                ItemScriptableObject objectToSpawn = availableObjects[randNum];
                 SpawnAtSelf(objectToSpawn);
             }
 
@@ -76,18 +76,24 @@ public class SpawnObject : MonoBehaviour
         }
     }
 
-    void SpawnAtSelf(GameObject item)
+    void SpawnAtSelf(ItemScriptableObject itemData)
     {
-        AddObjectIntoList(item);
-        MovingObject movingObject = item.GetComponent<MovingObject>();
+        AddObjectIntoList(itemData);
+        MovingObject movingObject = itemPrefab.GetComponent<MovingObject>();
         if (movingObject != null)
         {
             movingObject.currentDirection = (MovingObject.Direction)transforms[transformIndex].Directions;
         }
-        Instantiate(item, transforms[transformIndex].Parent.position, Quaternion.identity);
+        Item item = itemPrefab.GetComponent<Item>();
+        if (item != null)
+        {
+            item.data = itemData;
+        }
+
+        Instantiate(itemPrefab, transforms[transformIndex].Parent.position, Quaternion.identity);
     }
 
-    void AddObjectIntoList(GameObject item)
+    void AddObjectIntoList(ItemScriptableObject item)
     {
         if (!cachedObjectList.ContainsKey(item))
         {
@@ -97,11 +103,11 @@ public class SpawnObject : MonoBehaviour
 
     void IncreaseCachedObjectRound()
     {
-        List<GameObject> toRemove = new List<GameObject>();
+        List<ItemScriptableObject> toRemove = new List<ItemScriptableObject>();
 
         foreach (var pair in cachedObjectList.ToList())
         {
-            GameObject obj = pair.Key;
+            ItemScriptableObject obj = pair.Key;
             int round = pair.Value + 1;
 
             if (round >= cachedRate)
