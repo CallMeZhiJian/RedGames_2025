@@ -44,6 +44,7 @@ public class Box : MonoBehaviour
                     else
                     {
                         ScoreManager.Instance.OnWrongSort();
+                        Handheld.Vibrate();
                     }
                 }
                 else
@@ -55,6 +56,7 @@ public class Box : MonoBehaviour
                     else
                     {
                         ScoreManager.Instance.OnBiggieWrongSort();
+                        Handheld.Vibrate();
                     }
                 }
 
