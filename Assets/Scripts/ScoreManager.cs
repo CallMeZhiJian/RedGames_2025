@@ -7,10 +7,22 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+    public static ScoreManager Instance;
+
     public int totalScore = 0;
     public TMP_Text scoreText;
     public List<Image> lifeImages;
     public int totalLife = 3;
+
+    [Header("Audio")]
+    public AudioClip scoreClip;
+    public AudioClip wrongClip;
+    public AudioClip loseLifeClip;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -21,6 +33,8 @@ public class ScoreManager : MonoBehaviour
     {
         totalScore += score;
         UpdateScoreText();
+
+        if(scoreClip != null) AudioManager.Instance.PlaySFX(scoreClip);
     }
 
     public void OnWrongSort(int score)
@@ -31,6 +45,8 @@ public class ScoreManager : MonoBehaviour
             totalScore = 0;
         }
         UpdateScoreText();
+
+        if(wrongClip != null) AudioManager.Instance.PlaySFX(wrongClip);
     }
 
     void UpdateScoreText()
@@ -44,6 +60,8 @@ public class ScoreManager : MonoBehaviour
     public void LoseLife()
     {
         totalLife--;
+
+        if(loseLifeClip != null) AudioManager.Instance.PlaySFX(loseLifeClip);
 
         if (totalLife < 0)
         {

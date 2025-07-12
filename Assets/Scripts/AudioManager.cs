@@ -29,7 +29,11 @@ public class AudioManager : MonoBehaviour
         if(BGM_Source == null) BGM_Source = GetComponentInChildren<AudioSource>();
         if(SFX_Source == null) SFX_Source = GetComponentInChildren<AudioSource>();
 
-        if(BGM_Clip == null && BGM_Source != null) BGM_Source.clip = BGM_Clip;
+        if (BGM_Clip == null && BGM_Source != null)
+        {
+            BGM_Source.clip = BGM_Clip;
+            BGM_Source.Play();
+        }
     }
 
     public void PlaySFX(AudioClip clip, float volume = 1.0f)

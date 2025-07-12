@@ -179,11 +179,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8adb20c8baf79649a85032c9511da44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  scorePerCorrect: 5
-  penaltyPerWrong: 3
-  scorePerBiggieCorrect: 10
+  totalScore: 0
   scoreText: {fileID: 1569765672520843293}
+  lifeImages: []
+  totalLife: 3
+  scoreClip: {fileID: 8300000, guid: 8fbd0c878ddc5c746951ebbcd09b4772, type: 3}
+  wrongClip: {fileID: 8300000, guid: ffa792024dda6744c8a27fa87e587c19, type: 3}
+  loseLifeClip: {fileID: 8300000, guid: 90a24e94cc4a4184494758411bd53346, type: 3}
 --- !u!1 &9039510928598236743
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,11 +39,19 @@ public class Box : MonoBehaviour
                 {
                     if (item.category == category)
                     {
-                        ScoreManager.Instance.OnCorrectSort();
+                        ScoreManager.Instance.OnCorrectSort(5);
                     }
                     else
                     {
-                        ScoreManager.Instance.OnWrongSort();
+                        if(item.category == Category.Biggie)
+                        {
+                            ScoreManager.Instance.LoseLife();
+                        }
+                        else
+                        {
+                            ScoreManager.Instance.OnWrongSort(3);
+                        }
+
                         Handheld.Vibrate();
                     }
                 }
@@ -51,12 +59,7 @@ public class Box : MonoBehaviour
                 {
                     if (item.category == category)
                     {
-                        ScoreManager.Instance.OnBiggieCorrectSort();
-                    }
-                    else
-                    {
-                        ScoreManager.Instance.OnBiggieWrongSort();
-                        Handheld.Vibrate();
+                        ScoreManager.Instance.OnCorrectSort(10);
                     }
                 }
 
