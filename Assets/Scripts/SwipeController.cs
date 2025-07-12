@@ -74,7 +74,7 @@ public class SwipeController : MonoBehaviour
             }
 
             newPosition = new Vector3(newXPosition, transform.position.y, transform.position.z);
-            transform.position = newPosition;//Vector3.MoveTowards(transform.position, newPosition, snapSpeed);
+            transform.position = newPosition;
         }
     }
 
@@ -83,11 +83,11 @@ public class SwipeController : MonoBehaviour
         float distanceToSnap = GetClosestChildDistance();
 
         var instance = TransformHolder.Instance;
-        Vector3 snapPos = SwipeController.snapPosition;
+        Vector3 snapPos = snapPosition;
 
         // Move toward left if positive, right if negative
         Vector3 newPos = instance.GetBoxGrandParentPos() - new Vector3(distanceToSnap, 0.0f);
-        SwipeController.snapPosition = newPos;
+        snapPosition = newPos;
     }
 
     public float GetClosestChildDistance()
