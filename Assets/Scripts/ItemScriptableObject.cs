@@ -16,5 +16,4 @@ public class ItemScriptableObject : ScriptableObject
 {
     public Sprite sprite;
     public Category category;
-    public float points;
 }
