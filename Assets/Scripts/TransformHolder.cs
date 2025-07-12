@@ -11,9 +11,7 @@ public class TransformHolder : MonoBehaviour
     [SerializeField] private Transform leftGroupStartPoint;
     [SerializeField] private Transform leftTeleportPoint;
     [SerializeField] private Transform centerPoint;
-
     [SerializeField] private Transform boxGrandParent;
-    [HideInInspector] public Vector3 snapPosition = Vector3.zero;
 
     private void Awake()
     {
@@ -66,12 +64,5 @@ public class TransformHolder : MonoBehaviour
             return boxGrandParent.position;
 
         return Vector3.zero;
-    }
-
-    public void SnapParent(float speed)
-    {
-        if(boxGrandParent == null) return;
-
-        boxGrandParent.position = Vector3.MoveTowards(boxGrandParent.position, snapPosition, Time.deltaTime * speed);
     }
 }

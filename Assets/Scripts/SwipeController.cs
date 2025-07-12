@@ -1,26 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SwipeController : MonoBehaviour
 {
-    [SerializeField] private float swipeSpeed;
+    [SerializeField] private float swipeSpeed = 10.0f;
     [SerializeField] private float snapSpeed = 5.0f;
 
-    public Box[] childBoxes;
-
-    [SerializeField] private SwipeController leftGroup;
-    [SerializeField] private SwipeController rightGroup;
-
-    private void Start()
-    {
-        childBoxes = GetComponentsInChildren<Box>();
-    }
+    public static Vector3 snapPosition = Vector3.zero;
 
     void Update()
     {
-        if(Input.anyKey)
+#if !PLATFORM_ANDROID
+        if (Input.anyKey)
         {
             var pos = transform.position;
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
@@ -33,108 +26,50 @@ public class SwipeController : MonoBehaviour
             }
 
             transform.position = pos;
-
-            TeleportForLoop(pos);
         }
+#else
+        if (Input.touchCount > 0)
+        {
+            TouchScreenInput();
+        }
+#endif
         else
         {
-            SnapToCenter();
-            TransformHolder.Instance.SnapParent(snapSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, snapPosition, snapSpeed * Time.deltaTime);
         }
     }
 
-    public void TeleportForLoop(Vector3 myPosition)
+    private Vector3 startTouchPos;
+    private float offset;
+
+    public void TouchScreenInput()
     {
-        var instance = TransformHolder.Instance;
+        Touch touch = Input.GetTouch(0);
+        var worldTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
 
-        Vector3 rightTelePos = instance.GetRightTeleportPos();
-        Vector3 leftTelePos = instance.GetLeftTeleportPos();
-        Vector3 rightStartPos = instance.GetRightStartPos();
-        Vector3 leftStartPos = instance.GetLeftStartPos();
-
-        if (rightTelePos == Vector3.zero) return;
-        if (leftTelePos == Vector3.zero) return;
-
-        if (myPosition.x < leftTelePos.x)
+        if (touch.phase == TouchPhase.Began)
         {
-            transform.position = rightStartPos;
+            startTouchPos = worldTouchPos;
+            offset = worldTouchPos.x - transform.position.x;
         }
-        else if (myPosition.x > rightTelePos.x)
+
+        if (touch.phase == TouchPhase.Moved)
         {
-            transform.position = leftStartPos;
-        }
-    }
+            float movePos = worldTouchPos.x - startTouchPos.x;
 
-    public float DistanceToCenter()
-    {
-        var distance = Mathf.Abs(transform.position.x) - TransformHolder.Instance.GetCenterPos().x;
+            float newXPosition = 0.0f;
+            float absOffset = Mathf.Abs(offset);
 
-        return distance;
-    }
-
-    public bool SnapToCenter()
-    {
-        float leftGroupDistance = leftGroup.DistanceToCenter();
-        float rightGourpDistance = rightGroup.DistanceToCenter();
-        float myDistance = DistanceToCenter();
-
-        // Left Group is closer
-        if (leftGroupDistance < myDistance)
-        {
-            return false;
-        }
-        // Right Group is closer
-        else if (rightGourpDistance < myDistance)
-        {
-            return false;
-        }
-        // I am closer
-        else
-        {
-            float distanceToSnap = GetClosestChildDistance();
-
-            var instance = TransformHolder.Instance;
-            Vector3 snapPos = instance.snapPosition;
-
-            // Move toward left if positive, right if negative
-            Vector3 newPos = instance.GetBoxGrandParentPos() - new Vector3(distanceToSnap, 0.0f);
-            instance.snapPosition = newPos;
-
-            return true;
-        }
-    }
-
-    public float GetClosestChildDistance()
-    {
-        if (childBoxes != null)
-        {
-            float nearestDistance = 100.0f;
-            bool isPositiveValue = false;
-
-            // Comparing 2 boxes in one round
-            for (int i = 0; i < childBoxes.Length; i++)
+            if (offset < 0)
             {
-                float distance = childBoxes[i].DistanceToCenter();
-                float absDistance = Mathf.Abs(distance);
-
-                if(absDistance < nearestDistance)
-                {
-                    if(distance > 0)
-                    {
-                        isPositiveValue = true;
-                    }
-                    else
-                    {
-                        isPositiveValue = false;
-                    }
-
-                    nearestDistance = absDistance;
-                }
+                newXPosition = worldTouchPos.x + absOffset;
+            }
+            else
+            {
+                newXPosition = worldTouchPos.x - absOffset;
             }
 
-            return isPositiveValue ? nearestDistance : -nearestDistance;
+            transform.position = new Vector3(newXPosition, transform.position.y, transform.position.z);
         }
-
-        return 0.0f;
     }
 }
