@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnDirection: 0
-  spawnRate: 0.6
+  spawnRate: 1
   itemPrefab: {fileID: 0}
   spawnObjects:
   - {fileID: 11400000, guid: a28f5fec0af78524a948a6fe6a126c49, type: 2}

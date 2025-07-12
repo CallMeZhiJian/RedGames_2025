@@ -64,6 +64,11 @@ public class Box : MonoBehaviour
                         ScoreManager.Instance.OnCorrectSort(10);
                         scoreVFX.Play();
                     }
+                    else
+                    {
+                        ScoreManager.Instance.OnWrongSort(3);
+                        Handheld.Vibrate();
+                    }
                 }
 
                 Destroy(collision.gameObject);
