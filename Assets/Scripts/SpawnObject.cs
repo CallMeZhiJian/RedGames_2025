@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawnObject : MonoBehaviour
 {
+    public static SpawnObject Instance;
+
     public enum Direction
     {
         Down,
@@ -37,6 +39,11 @@ public class SpawnObject : MonoBehaviour
     private int transformIndex = 0;
 
     private Dictionary<ItemScriptableObject, int> cachedObjectList = new Dictionary<ItemScriptableObject, int>();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Update()
     {
