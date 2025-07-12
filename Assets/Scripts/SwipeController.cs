@@ -9,6 +9,9 @@ public class SwipeController : MonoBehaviour
     [SerializeField] private float snapSpeed = 5.0f;
 
     public static Vector3 snapPosition = Vector3.zero;
+    public static Vector3 newPosition = Vector3.zero;
+
+    public Box[] childBoxes;
 
     void Update()
     {
@@ -35,7 +38,8 @@ public class SwipeController : MonoBehaviour
 #endif
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, snapPosition, snapSpeed * Time.deltaTime);
+            SnapToCenter();
+            transform.position = Vector3.MoveTowards(transform.position, snapPosition, snapSpeed);
         }
     }
 
@@ -69,7 +73,54 @@ public class SwipeController : MonoBehaviour
                 newXPosition = worldTouchPos.x - absOffset;
             }
 
-            transform.position = new Vector3(newXPosition, transform.position.y, transform.position.z);
+            newPosition = new Vector3(newXPosition, transform.position.y, transform.position.z);
+            transform.position = newPosition;//Vector3.MoveTowards(transform.position, newPosition, snapSpeed);
         }
+    }
+
+    public void SnapToCenter()
+    {
+        float distanceToSnap = GetClosestChildDistance();
+
+        var instance = TransformHolder.Instance;
+        Vector3 snapPos = SwipeController.snapPosition;
+
+        // Move toward left if positive, right if negative
+        Vector3 newPos = instance.GetBoxGrandParentPos() - new Vector3(distanceToSnap, 0.0f);
+        SwipeController.snapPosition = newPos;
+    }
+
+    public float GetClosestChildDistance()
+    {
+        if (childBoxes != null)
+        {
+            float nearestDistance = 100.0f;
+            bool isPositiveValue = false;
+
+            // Comparing 2 boxes in one round
+            for (int i = 0; i < childBoxes.Length; i++)
+            {
+                float distance = childBoxes[i].DistanceToCenter();
+                float absDistance = Mathf.Abs(distance);
+
+                if (absDistance < nearestDistance)
+                {
+                    if (distance > 0)
+                    {
+                        isPositiveValue = true;
+                    }
+                    else
+                    {
+                        isPositiveValue = false;
+                    }
+
+                    nearestDistance = absDistance;
+                }
+            }
+
+            return isPositiveValue ? nearestDistance : -nearestDistance;
+        }
+
+        return 0.0f;
     }
 }
