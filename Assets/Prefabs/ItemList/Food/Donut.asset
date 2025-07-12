@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e96d338d02886fb448ff0d687dd2d49b, type: 3}
   m_Name: Donut
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 52b7e163dc6996743b5de54a4ff9cac7, type: 3}
-  category: 1
-  points: 100
+  sprite: {fileID: 21300000, guid: 05fdc4138a9685a438d087f5c956c9a1, type: 3}
+  category: 2
