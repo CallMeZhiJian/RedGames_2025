@@ -27,6 +27,7 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         UpdateScoreText();
+        scoreMultuplier = 1;
     }
 
     public void OnCorrectSort(int score)
@@ -49,8 +50,17 @@ public class ScoreManager : MonoBehaviour
         if(wrongClip != null) AudioManager.Instance.PlaySFX(wrongClip);
     }
 
+    const int INCREASE_PER_SCORES = 25;
+    private int scoreMultuplier = 1;
+
     void UpdateScoreText()
     {
+        if (totalScore > INCREASE_PER_SCORES * scoreMultuplier)
+        {
+            SpawnObject.Instance.IncreaseSpawnRate(0.05f);
+            scoreMultuplier++;
+        }
+
         if (scoreText != null)
         {
             scoreText.text = "Score: " + totalScore.ToString();

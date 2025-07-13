@@ -27,6 +27,7 @@ public class SpawnObject : MonoBehaviour
 
     public Direction spawnDirection;
     public float spawnRate = 1f;
+    [SerializeField] private float maxSpawnRate = 1.5f;
     public GameObject itemPrefab;
     public List<ItemScriptableObject> spawnObjects;
     public int cachedRate = 5;
@@ -131,5 +132,18 @@ public class SpawnObject : MonoBehaviour
         {
             cachedObjectList.Remove(obj);
         }
+    }
+
+    public void IncreaseSpawnRate(float rate)
+    {
+        if(spawnRate >= maxSpawnRate)
+        {
+            spawnRate -= rate;
+        }
+        else
+        {
+            spawnRate = maxSpawnRate;
+        }
+        
     }
 }
