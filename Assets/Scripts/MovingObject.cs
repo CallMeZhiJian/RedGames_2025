@@ -15,6 +15,8 @@ public class MovingObject : MonoBehaviour
 
     void Update()
     {
+        if (ScoreManager.isGameOver) return;
+
         myPosition = transform.position;
 
         switch (currentDirection)

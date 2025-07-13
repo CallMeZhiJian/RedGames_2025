@@ -4,31 +4,13 @@ using UnityEngine;
 
 public class PlayMainMenuBGM : MonoBehaviour
 {
-    public AudioClip BGM;
-    private AudioSource audioSource;
-
-    void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
-
-        audioSource.clip = BGM;
-        audioSource.loop = true;
-    }
-
     public void PlayMusic()
     {
-        if (!audioSource.isPlaying)
-            audioSource.Play();
+        AudioManager.Instance.BGM_Source.Play();
     }
 
     public void StopMusic()
     {
-        if (audioSource.isPlaying)
-            audioSource.Stop();
+        AudioManager.Instance.BGM_Source.Stop();
     }
 }

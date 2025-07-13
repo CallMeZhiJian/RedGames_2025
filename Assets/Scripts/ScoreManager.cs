@@ -15,6 +15,7 @@ public class ScoreManager : MonoBehaviour
     public int totalLife = 3;
     BoxHolder boxHolder;
     private int bestScore = 0;
+    public static bool isGameOver = false;
 
     [Header("Audio")]
     public AudioClip scoreClip;
@@ -30,7 +31,7 @@ public class ScoreManager : MonoBehaviour
     public TMP_Text tappyScoreText;
     public TMP_Text bamScoreText;
     public TMP_Text biggieScoreText;
-
+    public TMP_Text performanceText;
     private void Awake()
     {
         Instance = this;
@@ -109,8 +110,8 @@ public class ScoreManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over!");
+        isGameOver = true;
         winScreenPanel.SetActive(true);
-
         if (totalScoreText != null)
         {
             totalScoreText.text = "Score: " + totalScore.ToString();
@@ -150,8 +151,23 @@ public class ScoreManager : MonoBehaviour
         {
             biggieScoreText.text = BoxHolder.biggieCounter.ToString();
         }
+        if (performanceText != null)
+        {
+            performanceText.text = GetPerformanceRating();
+        }
+
+
     }
-
-
+    public string GetPerformanceRating()
+    {
+        if (totalScore >= 500)
+            return "Amazing!";
+        else if (totalScore >= 250)
+            return "Great!";
+        else if (totalScore >= 50)
+            return "Good Job!";
+        else
+            return "Good Attempt";
+    }
 }
 

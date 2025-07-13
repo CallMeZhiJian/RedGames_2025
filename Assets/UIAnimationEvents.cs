@@ -13,6 +13,7 @@ public class UIAnimationEvents : MonoBehaviour
     public Animator infoPanelAnimator;
     public GameObject infoPanelParent;
     public GameObject splashScreenParent;
+
     public void GameLogoGoUp()
     {
         logoAnimator.Play("GameLogoMoveUp");
@@ -39,6 +40,7 @@ public class UIAnimationEvents : MonoBehaviour
     {
         infoPanelParent.SetActive(true);
         infoPanelAnimator.Play("InfoPanelSlideIn");
+        AudioManager.Instance.PlayButtonSFX();
     }
     public void InfoPanelSlideOut()
     {
@@ -47,6 +49,7 @@ public class UIAnimationEvents : MonoBehaviour
     public void MainMenuSlideIn()
     {
         mainMenuAnimator.Play("MainMenuSlideIn");
+        AudioManager.Instance.PlayButtonSFX();
     }
     public void MainMenuSlideOut()
     {
