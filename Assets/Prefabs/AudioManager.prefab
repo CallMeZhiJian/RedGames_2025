@@ -49,6 +49,7 @@ MonoBehaviour:
   BGM_Source: {fileID: 2959693987018928965}
   SFX_Source: {fileID: 502707893316669354}
   BGM_Clip: {fileID: 8300000, guid: 4d9507fc7c1a4d447b86c5eac8d5f48e, type: 3}
+  Button_Clip: {fileID: 8300000, guid: 9012806d2372ea7459a01fd0a01eb70d, type: 3}
 --- !u!1 &4096211625156821031
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource SFX_Source;
 
     public AudioClip BGM_Clip;
+    public AudioClip Button_Clip;
 
     private void Awake()
     {
@@ -40,6 +41,17 @@ public class AudioManager : MonoBehaviour
     {
         SFX_Source.clip = clip;
         SFX_Source.volume = volume;
+
+        if (SFX_Source.isPlaying) SFX_Source.Stop();
+
+        SFX_Source.Play();
+    }
+
+    public void PlayButtonSFX()
+    {
+        if (Button_Clip == null) return;
+
+        SFX_Source.clip = Button_Clip;
 
         if (SFX_Source.isPlaying) SFX_Source.Stop();
 
