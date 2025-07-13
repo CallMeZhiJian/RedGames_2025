@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class BiggieEvent : MonoBehaviour
 {
-    public enum BiggieItem
-    {
-        Banana = 0,
-        Braap = 1,
-        FunnnyFace = 2,
-    }
-
     [SerializeField] private float interval;
     private float timePassed = 0.0f;
 
@@ -34,15 +27,15 @@ public class BiggieEvent : MonoBehaviour
         {
             timePassed = 0.0f;
 
-            TriggerEvent(BiggieItem.Banana);
+            TriggerEvent(Random.Range(0, itemData.Length - 1));
         }
     }
 
-    public void TriggerEvent(BiggieItem item)
+    public void TriggerEvent(int item)
     {
         AudioManager.Instance.PlaySFX(biggieLaughClip);
 
-        spawnNum = (int)item;
+        spawnNum = item;
 
         StartCoroutine(FlyIn());
     }
