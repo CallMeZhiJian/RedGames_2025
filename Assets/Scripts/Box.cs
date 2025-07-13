@@ -80,13 +80,11 @@ public class Box : MonoBehaviour
 
         if (counter >= stage_3_Count)
         {
-            //spriteManager.AssignSprite(2);
             animator.SetTrigger("phase_3");
             CancelInvoke("TriggerPhases");
         }
         else if (counter >= stage_2_Count)
         {
-            //spriteManager.AssignSprite(1);
             animator.SetTrigger("phase_2");
         }
     }
@@ -105,7 +103,6 @@ public class Box : MonoBehaviour
                     {
                         ScoreManager.Instance.OnCorrectSort(5);
                         scoreVFX.Play();
-                        //AddCounter();
                         BoxHolder.AddCounter(category);
                     }
                     else
@@ -118,8 +115,9 @@ public class Box : MonoBehaviour
                         {
                             ScoreManager.Instance.OnWrongSort(3);
                         }
-
+#if PLATFORM_ANDRIOD
                         Handheld.Vibrate();
+#endif
                     }
                 }
                 else
@@ -128,13 +126,14 @@ public class Box : MonoBehaviour
                     {
                         ScoreManager.Instance.OnCorrectSort(10);
                         scoreVFX.Play();
-                        //AddCounter();
                         BoxHolder.AddCounter(category);
                     }
                     else
                     {
                         ScoreManager.Instance.OnWrongSort(3);
+#if PLATFORM_ANDRIOD
                         Handheld.Vibrate();
+#endif
                     }
                 }
 
