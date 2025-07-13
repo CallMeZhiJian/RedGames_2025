@@ -7,8 +7,8 @@ public class SpriteManager : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Category parentCategory = Category.None;
 
-    public List<ColorByCategory> colorByCategory;
-    Dictionary<Category, Color> colorDict = new Dictionary<Category, Color>();
+    public List<SpriteByCategory> spriteByCategory;
+    Dictionary<Category, List<Sprite>> spriteDict = new Dictionary<Category, List<Sprite>>();
 
     void Start()
     {
@@ -19,27 +19,33 @@ public class SpriteManager : MonoBehaviour
             parentCategory = parent.GetCategory();
         }
 
-        foreach (var category in colorByCategory)
+        foreach (var category in spriteByCategory)
         {
-            colorDict.Add(category.category, category.color);
+            spriteDict.Add(category.category, category.sprite);
         }
 
-        AssignSprite();
+        AssignSprite(0);
     }
 
-    public void AssignSprite()
+    public void AssignSprite(int index)
     {
+        var sprites = spriteDict[parentCategory];
+        if (index > sprites.Count - 1) return;
+
         if (spriteRenderer != null && parentCategory != Category.None)
-        {
-            spriteRenderer.color = colorDict[parentCategory];
+        {  
+            if (sprites[index] != spriteRenderer.sprite)
+            {
+                spriteRenderer.sprite = sprites[index];
+            }
         }
 
     }
 }
 
 [System.Serializable]
-public class ColorByCategory
+public class SpriteByCategory
 {
     public Category category;
-    public Color color;
+    public List<Sprite> sprite;
 }
