@@ -660,7 +660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d41134c8c0ba189418438718cee07188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 10
+  interval: 15
   animator: {fileID: 1817486004}
   flyInAnimation: {fileID: 7400000, guid: bdb7a4bdf12c5304e829088de5d631c9, type: 2}
   flyOutAnimation: {fileID: 7400000, guid: 863c673ebff04db48b1d461eb20eec08, type: 2}
