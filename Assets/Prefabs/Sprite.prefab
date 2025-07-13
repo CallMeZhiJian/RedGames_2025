@@ -97,24 +97,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1303a506ca1e07849a3efdd962121f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteToUse: 0
   spriteByCategory:
   - category: 1
     sprite:
     - {fileID: 21300000, guid: 43926a82664c9db46932edb5b74fbe8d, type: 3}
-    - {fileID: 21300000, guid: 7ff36e384da104141a2a52f18bdac4a1, type: 3}
     - {fileID: 21300000, guid: 305beaefe06641e498f4271a276b580f, type: 3}
+    - {fileID: 21300000, guid: 7ff36e384da104141a2a52f18bdac4a1, type: 3}
   - category: 2
     sprite:
     - {fileID: 21300000, guid: de974ff5276b10a4baadda49c2a2847b, type: 3}
-    - {fileID: 21300000, guid: fccb1b28c0831924b86ebf1f91a95a8b, type: 3}
     - {fileID: 21300000, guid: 196d7554f2547784c8e1fed1fa250639, type: 3}
+    - {fileID: 21300000, guid: fccb1b28c0831924b86ebf1f91a95a8b, type: 3}
   - category: 3
     sprite:
     - {fileID: 21300000, guid: fd698d0795b340e4482bab45ca31e272, type: 3}
-    - {fileID: 21300000, guid: 2caa5bf94a797184dad63764d0846d7c, type: 3}
     - {fileID: 21300000, guid: 1a4ad5b77134df34799a17ea12614608, type: 3}
+    - {fileID: 21300000, guid: 2caa5bf94a797184dad63764d0846d7c, type: 3}
   - category: 4
     sprite:
     - {fileID: 21300000, guid: 86932f51fd1644a43a5ae0efabb8fc00, type: 3}
-    - {fileID: 21300000, guid: 11198008af02e214ab0c994ebbb8831f, type: 3}
     - {fileID: 21300000, guid: 52921b051680e0141a5607eae7fc3d11, type: 3}
+    - {fileID: 21300000, guid: 11198008af02e214ab0c994ebbb8831f, type: 3}

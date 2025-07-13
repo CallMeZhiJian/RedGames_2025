@@ -7,16 +7,18 @@ public class Box : MonoBehaviour
     [SerializeField] private Category category;
     [SerializeField] private ParticleSystem scoreVFX;
 
-    [SerializeField] private int stage_2_Count;
-    [SerializeField] private int stage_3_Count;
-    private int counter;
-
     private SpriteManager spriteManager;
+    private Animator animator;
+
+    [SerializeField] private int stage_2_Count = 5;
+    [SerializeField] private int stage_3_Count = 10;
 
     private void Start()
     {
         spriteManager = GetComponentInChildren<SpriteManager>();
-        counter = 0;
+        animator = GetComponentInChildren<Animator>();
+
+        InvokeRepeating("TriggerPhases", 1, 1);
     }
 
     public Category GetCategory() { return category; }
@@ -40,17 +42,52 @@ public class Box : MonoBehaviour
         return distance;
     }
 
-    public void AddCounter()
+    //public void AddCounter()
+    //{
+    //    counter++;
+
+    //    if (counter >= stage_3_Count)
+    //    {
+    //        //spriteManager.AssignSprite(2);
+    //        animator.SetTrigger("phase_3");
+    //    }
+    //    else if (counter >= stage_2_Count)
+    //    {
+    //        //spriteManager.AssignSprite(1);
+    //        animator.SetTrigger("phase_2");
+    //    }
+    //}
+
+    public void TriggerPhases()
     {
-        counter++;
+        int counter = 0;
+
+        switch (category)
+        {
+            case Category.Sport:
+                counter = BoxHolder.oguCounter;
+                break;
+            case Category.Food:
+                counter = BoxHolder.bamCounter;
+                break;
+            case Category.Adventure:
+                counter = BoxHolder.tappyCounter;
+                break;
+            case Category.Biggie:
+                counter = BoxHolder.biggieCounter;
+                break;
+        }
 
         if (counter >= stage_3_Count)
         {
-            spriteManager.AssignSprite(2);
+            //spriteManager.AssignSprite(2);
+            animator.SetTrigger("phase_3");
+            CancelInvoke("TriggerPhases");
         }
         else if (counter >= stage_2_Count)
         {
-            spriteManager.AssignSprite(1);
+            //spriteManager.AssignSprite(1);
+            animator.SetTrigger("phase_2");
         }
     }
 
@@ -68,7 +105,8 @@ public class Box : MonoBehaviour
                     {
                         ScoreManager.Instance.OnCorrectSort(5);
                         scoreVFX.Play();
-                        AddCounter();
+                        //AddCounter();
+                        BoxHolder.AddCounter(category);
                     }
                     else
                     {
@@ -90,7 +128,8 @@ public class Box : MonoBehaviour
                     {
                         ScoreManager.Instance.OnCorrectSort(10);
                         scoreVFX.Play();
-                        AddCounter();
+                        //AddCounter();
+                        BoxHolder.AddCounter(category);
                     }
                     else
                     {

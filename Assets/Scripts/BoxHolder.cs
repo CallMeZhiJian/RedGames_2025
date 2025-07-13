@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BoxHolder : MonoBehaviour
@@ -8,6 +9,11 @@ public class BoxHolder : MonoBehaviour
 
     public BoxHolder leftGroup;
     public BoxHolder rightGroup;
+
+    public static int tappyCounter = 0;
+    public static int bamCounter = 0;
+    public static int oguCounter = 0;
+    public static int biggieCounter = 0;
 
     private void Start()
     {
@@ -63,6 +69,25 @@ public class BoxHolder : MonoBehaviour
             {
                 transform.position = new Vector3(rightGroup_X - BOX_HOLDER_GAP, boxHolderPos.y, boxHolderPos.z);
             }
+        }
+    }
+
+    public static void AddCounter(Category category)
+    {
+        switch (category)
+        {
+            case Category.Sport:
+                oguCounter++;
+                break;
+            case Category.Food:
+                bamCounter++;
+                break;
+            case Category.Adventure:
+                tappyCounter++;
+                break;
+            case Category.Biggie:
+                biggieCounter++;
+                break;
         }
     }
 

@@ -7,6 +7,8 @@ public class SpriteManager : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Category parentCategory = Category.None;
 
+    public int spriteToUse = 0;
+
     public List<SpriteByCategory> spriteByCategory;
     Dictionary<Category, List<Sprite>> spriteDict = new Dictionary<Category, List<Sprite>>();
 
@@ -24,7 +26,7 @@ public class SpriteManager : MonoBehaviour
             spriteDict.Add(category.category, category.sprite);
         }
 
-        AssignSprite(0);
+        AssignSprite(spriteToUse);
     }
 
     public void AssignSprite(int index)
