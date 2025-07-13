@@ -67,9 +67,9 @@ public class ScoreManager : MonoBehaviour
 
     void UpdateScoreText()
     {
-        if ( (totalScore > INCREASE_PER_SCORES * scoreMultiplier)
+        if ( totalScore > INCREASE_PER_SCORES * scoreMultiplier)
         {
-            SpawnObject.Istance.IncreaseSpawnRate(0.05f);
+            SpawnObject.Instance.IncreaseSpawnRate(0.05f);
             scoreMultiplier++;
         }
 
