@@ -57,10 +57,10 @@ public class BiggieEvent : MonoBehaviour
         Item item = itemPrefab.GetComponent<Item>();
         if(item) item.data = currData;
 
-        MovingObject movingObject = itemPrefab.GetComponent<MovingObject>();
-        if (movingObject != null)
+        ItemMovement itemMovement = itemPrefab.GetComponent<ItemMovement>();
+        if (itemMovement != null)
         {
-            movingObject.currentDirection = MovingObject.Direction.Down;
+            itemMovement.currentDirection = ItemMovement.Direction.Down;
         }
 
         Instantiate(itemPrefab, transform.position, Quaternion.identity);

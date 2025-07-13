@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9115943609439091832}
   - component: {fileID: 7708218091992929058}
   - component: {fileID: 2641217428404157841}
-  - component: {fileID: -2608492849159458429}
+  - component: {fileID: 122743279164207046}
   - component: {fileID: 7767614857559688352}
   m_Layer: 0
   m_Name: Item
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 105b63698a8ac1746a1b29d2ee5dcad1, type: 2}
   category: 0
---- !u!114 &-2608492849159458429
+--- !u!114 &122743279164207046
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,11 +111,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3790044211221481478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeaac09f48d8e604d85940c806d637cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f9738fce08029d48bb94e2245b1ac11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  currentDirection: 2
+  currentDirection: 0
   myPosition: {x: 0, y: 0, z: 0}
 --- !u!61 &7767614857559688352
 BoxCollider2D:

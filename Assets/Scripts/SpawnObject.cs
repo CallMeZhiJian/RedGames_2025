@@ -86,10 +86,10 @@ public class SpawnObject : MonoBehaviour
     void SpawnAtSelf(ItemScriptableObject itemData)
     {
         AddObjectIntoList(itemData);
-        MovingObject movingObject = itemPrefab.GetComponent<MovingObject>();
-        if (movingObject != null)
+        ItemMovement itemMovement = itemPrefab.GetComponent<ItemMovement>();
+        if (itemMovement != null)
         {
-            movingObject.currentDirection = (MovingObject.Direction)transforms[transformIndex].Directions;
+            itemMovement.currentDirection = (ItemMovement.Direction)transforms[transformIndex].Directions;
         }
         Item item = itemPrefab.GetComponent<Item>();
         if (item != null)
