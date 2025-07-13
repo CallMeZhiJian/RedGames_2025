@@ -10,14 +10,26 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance;
 
     public int totalScore = 0;
-    public TMP_Text scoreText;
+    public TMP_Text HUDScoretext;
     public List<Image> lifeImages;
     public int totalLife = 3;
+    BoxHolder boxHolder;
+    private int bestScore = 0;
 
     [Header("Audio")]
     public AudioClip scoreClip;
     public AudioClip wrongClip;
     public AudioClip loseLifeClip;
+
+    [Header("WinScreen")]
+    public GameObject winScreenPanel;
+    public Image newBest;
+    public TMP_Text totalScoreText;
+    public TMP_Text newBestScoreText;
+    public TMP_Text oguScoreText;
+    public TMP_Text tappyScoreText;
+    public TMP_Text bamScoreText;
+    public TMP_Text biggieScoreText;
 
     private void Awake()
     {
@@ -26,8 +38,9 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
+        bestScore = PlayerPrefs.GetInt("BestScore", 0);
         UpdateScoreText();
-        scoreMultuplier = 1;
+        scoreMultiplier = 1;
     }
 
     public void OnCorrectSort(int score)
@@ -35,7 +48,7 @@ public class ScoreManager : MonoBehaviour
         totalScore += score;
         UpdateScoreText();
 
-        if(scoreClip != null) AudioManager.Instance.PlaySFX(scoreClip);
+        if (scoreClip != null) AudioManager.Instance.PlaySFX(scoreClip);
     }
 
     public void OnWrongSort(int score)
@@ -47,23 +60,22 @@ public class ScoreManager : MonoBehaviour
         }
         UpdateScoreText();
 
-        if(wrongClip != null) AudioManager.Instance.PlaySFX(wrongClip);
+        if (wrongClip != null) AudioManager.Instance.PlaySFX(wrongClip);
     }
-
     const int INCREASE_PER_SCORES = 25;
-    private int scoreMultuplier = 1;
+    private int scoreMultiplier = 1;
 
     void UpdateScoreText()
     {
-        if (totalScore > INCREASE_PER_SCORES * scoreMultuplier)
+        if ( (totalScore > INCREASE_PER_SCORES * scoreMultiplier)
         {
-            SpawnObject.Instance.IncreaseSpawnRate(0.05f);
-            scoreMultuplier++;
+            SpawnObject.Istance.IncreaseSpawnRate(0.05f);
+            scoreMultiplier++;
         }
 
-        if (scoreText != null)
+        if (HUDScoretext != null)
         {
-            scoreText.text = "Score: " + totalScore.ToString();
+            HUDScoretext.text = "Score: " + totalScore.ToString();
         }
     }
 
@@ -71,7 +83,7 @@ public class ScoreManager : MonoBehaviour
     {
         totalLife--;
 
-        if(loseLifeClip != null) AudioManager.Instance.PlaySFX(loseLifeClip);
+        if (loseLifeClip != null) AudioManager.Instance.PlaySFX(loseLifeClip);
 
         if (totalLife < 0)
         {
@@ -97,7 +109,49 @@ public class ScoreManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over!");
+        winScreenPanel.SetActive(true);
+
+        if (totalScoreText != null)
+        {
+            totalScoreText.text = "Score: " + totalScore.ToString();
+        }
+        if (totalScore > bestScore)
+        {
+            bestScore = totalScore;
+            PlayerPrefs.SetInt("BestScore", bestScore);
+            PlayerPrefs.Save();
+            if (newBest != null)
+                newBest.gameObject.SetActive(true);
+        }
+        else
+        {
+            if (newBest != null)
+            {
+                newBest.gameObject.SetActive(false);
+            }
+        }
+        if (newBestScoreText != null)
+        {
+            newBestScoreText.text = "Best Score: " + bestScore.ToString();
+        }
+        if (oguScoreText != null)
+        {
+            oguScoreText.text = BoxHolder.oguCounter.ToString();
+        }
+        if (tappyScoreText != null)
+        {
+            tappyScoreText.text = BoxHolder.tappyCounter.ToString();
+        }
+        if (bamScoreText != null)
+        {
+            bamScoreText.text = BoxHolder.bamCounter.ToString();
+        }
+        if (biggieScoreText != null)
+        {
+            biggieScoreText.text = BoxHolder.biggieCounter.ToString();
+        }
     }
+
 
 }
 
