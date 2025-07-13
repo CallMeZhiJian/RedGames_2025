@@ -81,11 +81,14 @@ public class Box : MonoBehaviour
         if (counter >= stage_3_Count)
         {
             animator.SetTrigger("phase_3");
+            StartCoroutine(ResetTrigger("phase_3"));
+
             CancelInvoke("TriggerPhases");
         }
         else if (counter >= stage_2_Count)
         {
             animator.SetTrigger("phase_2");
+            StartCoroutine(ResetTrigger("phase_2"));
         }
     }
 
@@ -140,5 +143,12 @@ public class Box : MonoBehaviour
                 Destroy(collision.gameObject); 
             }
         }
+    }
+
+    public IEnumerator ResetTrigger(string name)
+    {
+        yield return null;
+
+        animator.ResetTrigger(name);
     }
 }

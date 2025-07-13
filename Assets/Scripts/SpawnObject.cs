@@ -48,6 +48,8 @@ public class SpawnObject : MonoBehaviour
 
     void Update()
     {
+        if(ScoreManager.isGameOver) return;
+
         if (!delayFinished)
         {
             delayTimer += Time.deltaTime;

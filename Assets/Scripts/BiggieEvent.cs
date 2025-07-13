@@ -19,8 +19,15 @@ public class BiggieEvent : MonoBehaviour
     public AudioClip biggieLaughClip;
     public AudioClip bananaClip;
 
+    private void Start()
+    {
+        isSpawned = false;
+    }
+
     private void Update()
     {
+        if (ScoreManager.isGameOver) return;
+
         timePassed += Time.deltaTime;
 
         if(timePassed > interval)
@@ -40,6 +47,8 @@ public class BiggieEvent : MonoBehaviour
         StartCoroutine(FlyIn());
     }
 
+    private bool isSpawned= false;
+
     public void SpawnItem()
     {
         if(itemData == null) return;
@@ -56,9 +65,11 @@ public class BiggieEvent : MonoBehaviour
             itemMovement.currentDirection = ItemMovement.Direction.Down;
         }
 
-        Instantiate(itemPrefab, transform.position, Quaternion.identity);
-
-        //SpawnObject.Instance.spawnObjects.Add(currData);
+        if (!isSpawned)
+        {
+            Instantiate(itemPrefab, transform.position, Quaternion.identity);
+            isSpawned = true;
+        }
 
         StartCoroutine(FlyOut());
     }
@@ -85,5 +96,7 @@ public class BiggieEvent : MonoBehaviour
         animator.SetTrigger("trigger_idle");
 
         animator.ResetTrigger("trigger_out");
+
+        isSpawned = false;
     }
 }

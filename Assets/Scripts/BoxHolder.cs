@@ -18,6 +18,10 @@ public class BoxHolder : MonoBehaviour
     private void Start()
     {
         childBoxes = GetComponentsInChildren<Box>();
+        tappyCounter = 0;
+        bamCounter = 0;
+        oguCounter = 0;
+        biggieCounter = 0; 
     }
 
     private void Update()

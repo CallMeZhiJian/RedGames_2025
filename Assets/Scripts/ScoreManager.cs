@@ -42,6 +42,7 @@ public class ScoreManager : MonoBehaviour
         bestScore = PlayerPrefs.GetInt("BestScore", 0);
         UpdateScoreText();
         scoreMultiplier = 1;
+        isGameOver = false;
     }
 
     public void OnCorrectSort(int score)
